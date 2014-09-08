@@ -8,7 +8,7 @@ The busybox based rudder repo is available at https://registry.hub.docker.com/u/
 
 ##### Building and releasing
 
-```
+```bash
 $ cat ./script/build.sh
 docker build --rm --force-rm -t gurpartap/rudder-build .
 docker run -v /var/run/docker.sock:/var/run/docker.sock \
@@ -16,31 +16,31 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock \
            -ti --name rudder-build gurpartap/rudder-build
 ```
 
-```
+```bash
 $ cat ./script/push.sh
 docker push gurpartap/rudder:latest
 ```
 
-```
+```bash
 $ cat ./script/clean.sh
 docker rm -f rudder-build
 docker rmi -f gurpartap/rudder-build
 docker rmi -f gurpartap/rudder
 ```
 
-```
+```bash
 $ ./release.sh # will run them all.
 ```
 
 ##### Running with docker
 
-```
+```bash
 docker run gurpartap/rudder
 ```
 
 ##### Copying the binary
 
-```
+```bash
 # Mount host's /usr/local/bin directory in the container and copy rudder over.
 docker run --rm -v /usr/local/bin:/volumes/host/bin gurpartap/rudder \
   cp /usr/local/bin/rudder /volumes/host/bin/rudder
@@ -48,7 +48,7 @@ docker run --rm -v /usr/local/bin:/volumes/host/bin gurpartap/rudder \
 
 ##### Provision rudder on CoreOS, etc. using Vagrant
 
-```
+```ruby
 config.vm.provision :docker do |docker|
   docker.run "gurpartap/rudder",
     args: "--rm -v /usr/local/bin:/volumes/host/bin \
