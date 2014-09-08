@@ -17,6 +17,7 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/
 ```
 $ cat ./script/push.sh
 docker push gurpartap/rudder:latest
+```
 
 ```
 $ cat ./script/clean.sh
@@ -29,14 +30,14 @@ docker rmi -f gurpartap/rudder
 $ ./release.sh # will run them all.
 ```
 
-##### Copying the binary
+##### Using the binary
 
 ```
 # Mount host's /usr/local/bin directory in the container and copy rudder over.
 docker run --rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /volumes/host/bin/rudder
 ```
 
-##### Provision Vagrant VM with rudder
+##### Provision rudder on CoreOS, etc. using Vagrant
 
 ```
 config.vm.provision :docker do |docker|
