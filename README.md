@@ -4,30 +4,36 @@ Builds a [google/golang](https://registry.hub.docker.com/u/google/golang/) based
 
 Also serves as an example for docker within docker usage and shipping binaries with a minimal base image (busybox) after compiling in an intermediary image.
 
-##### Build
+The busybox based rudder repo is available at https://registry.hub.docker.com/u/gurpartap/rudder.
+
+##### Building and releasing
 
 ```
+$ cat ./script/build.sh
 docker build --rm --force-rm -t gurpartap/rudder-build .
-docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -ti --name rudder-build gurpartap/rudder-build
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/local/bin/docker -ti --name rudder-build gurpartap/rudder-build
 ```
 
-##### Push
-
 ```
+$ cat ./script/push.sh
 docker push gurpartap/rudder:latest
 
-##### Clean
-
 ```
+$ cat ./script/clean.sh
 docker rm -f rudder-build
 docker rmi -f gurpartap/rudder-build
 docker rmi -f gurpartap/rudder
 ```
 
-##### Usage
+```
+$ ./release.sh # will run them all.
+```
+
+##### Copying the binary
 
 ```
-docker run -v /opt/bin:/opt/bin --rm cp /usr/local/bin/rudder /opt/bin/rudder
+# Mount host's /usr/local/bin directory in the container and copy rudder over.
+docker run --rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /volumes/host/bin/rudder
 ```
 
 ##### Provision Vagrant VM with rudder
@@ -35,9 +41,9 @@ docker run -v /opt/bin:/opt/bin --rm cp /usr/local/bin/rudder /opt/bin/rudder
 ```
 config.vm.provision :docker do |docker|
   docker.run "gurpartap/rudder",
-    args: "-v /opt/bin:/opt/bin --rm cp /usr/local/bin/rudder /opt/bin/rudder",
+    args: "--rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /volumes/host/bin/rudder",
     auto_assign_name: false, daemonize: false
 end
 ```
 
-The busybox based rudder repo is available at https://registry.hub.docker.com/u/gurpartap/rudder.
+If you have any feedback, please [contact me](http://gurpartap.com/).
