@@ -32,13 +32,7 @@ docker rmi -f gurpartap/rudder
 $ ./release.sh # will run them all.
 ```
 
-##### Running with docker
-
-```bash
-docker run gurpartap/rudder
-```
-
-##### Copying the binary
+##### Copying the binary to host
 
 ```bash
 # Mount host's /usr/local/bin directory in the container and copy rudder over.
