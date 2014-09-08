@@ -1,4 +1,4 @@
-## Build and push rudder with Docker
+### Build and package rudder with busybox using Docker
 
 Builds a [google/golang](https://registry.hub.docker.com/u/google/golang/) based image which builds [rudder](https://github.com/coreos/rudder) from source and then packages the built binary with [busybox](https://registry.hub.docker.com/_/busybox) base image.
 
@@ -23,3 +23,21 @@ docker rm -f rudder-build
 docker rmi -f gurpartap/rudder-build
 docker rmi -f gurpartap/rudder
 ```
+
+##### Usage
+
+```
+docker run -v /opt/bin:/opt/bin --rm cp /usr/local/bin/rudder /opt/bin/rudder
+```
+
+##### Provision Vagrant VM with rudder
+
+```
+config.vm.provision :docker do |docker|
+  docker.run "gurpartap/rudder",
+    args: "-v /opt/bin:/opt/bin --rm cp /usr/local/bin/rudder /opt/bin/rudder",
+    auto_assign_name: false, daemonize: false
+end
+```
+
+The busybox based rudder repo is available at https://registry.hub.docker.com/u/gurpartap/rudder.
