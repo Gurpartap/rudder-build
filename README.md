@@ -11,7 +11,9 @@ The busybox based rudder repo is available at https://registry.hub.docker.com/u/
 ```
 $ cat ./script/build.sh
 docker build --rm --force-rm -t gurpartap/rudder-build .
-docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/local/bin/docker -ti --name rudder-build gurpartap/rudder-build
+docker run -v /var/run/docker.sock:/var/run/docker.sock \
+           -v $(which docker):/usr/local/bin/docker \
+           -ti --name rudder-build gurpartap/rudder-build
 ```
 
 ```
@@ -34,7 +36,8 @@ $ ./release.sh # will run them all.
 
 ```
 # Mount host's /usr/local/bin directory in the container and copy rudder over.
-docker run --rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /volumes/host/bin/rudder
+docker run --rm -v /usr/local/bin:/volumes/host/bin \
+  cp /usr/local/bin/rudder /volumes/host/bin/rudder
 ```
 
 ##### Provision rudder on CoreOS, etc. using Vagrant
@@ -42,7 +45,8 @@ docker run --rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /vo
 ```
 config.vm.provision :docker do |docker|
   docker.run "gurpartap/rudder",
-    args: "--rm -v /usr/local/bin:/volumes/host/bin cp /usr/local/bin/rudder /volumes/host/bin/rudder",
+    args: "--rm -v /usr/local/bin:/volumes/host/bin \
+           cp /usr/local/bin/rudder /volumes/host/bin/rudder",
     auto_assign_name: false, daemonize: false
 end
 ```
