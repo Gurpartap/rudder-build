@@ -36,8 +36,8 @@ $ ./release.sh # will run them all.
 
 ```bash
 # Mount host's /usr/local/bin directory in the container and copy rudder over.
-docker run --rm -v /usr/local/bin:/volumes/host/bin gurpartap/rudder \
-  cp /usr/local/bin/rudder /volumes/host/bin/rudder
+docker run --rm -v /usr/local/bin:/target gurpartap/rudder \
+  cp /usr/local/bin/rudder /target
 ```
 
 ##### Provision rudder on CoreOS, etc. using Vagrant
@@ -45,8 +45,7 @@ docker run --rm -v /usr/local/bin:/volumes/host/bin gurpartap/rudder \
 ```ruby
 config.vm.provision :docker do |docker|
   docker.run "gurpartap/rudder",
-    args: "--rm -v /usr/local/bin:/volumes/host/bin \
-           cp /usr/local/bin/rudder /volumes/host/bin/rudder",
+    args: "--rm -v /usr/local/bin:/target cp /usr/local/bin/rudder /target",
     auto_assign_name: false, daemonize: false
 end
 ```
