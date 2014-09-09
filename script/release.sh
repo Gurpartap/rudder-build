@@ -3,13 +3,15 @@
 
 set +e
 
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 echo " ---> Building..."
-sh ./build.sh
+sh $DIR/build.sh
 
 echo " ---> Pushing gurpartap/rudder:${1:-latest}..."
-sh ./push.sh $1
+sh $DIR/push.sh $1
 
 echo " ---> Cleaning up..."
-sh ./clean.sh
+sh $DIR/clean.sh
 
 echo " ---> Done."
