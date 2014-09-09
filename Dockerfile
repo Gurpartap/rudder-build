@@ -5,4 +5,6 @@ RUN cd /usr/local/src && git clone http://github.com/coreos/rudder.git && \
 
 ADD ./busybox-rudder/Dockerfile /usr/local/src/rudder/Dockerfile
 
-CMD docker build --rm --force-rm -t gurpartap/rudder /usr/local/src/rudder/
+RUN docker build --rm --force-rm -t gurpartap/rudder /usr/local/src/rudder/
+
+CMD ["./release.sh"]
