@@ -1,6 +1,6 @@
 ### Build and package rudder with busybox using Docker
 
-Builds a [google/golang](https://registry.hub.docker.com/u/google/golang/) based image which builds [rudder](https://github.com/coreos/rudder) from source and then packages the built binary with [busybox](https://registry.hub.docker.com/_/busybox) base image.
+Builds a [google/golang](https://registry.hub.docker.com/u/google/golang/) based image which builds [rudder](https://github.com/coreos/rudder) from source and then packages the built binary with [busybox](https://registry.hub.docker.com/_/busybox) base image. The final image is around 9.9MB in size as seen from `docker images`.
 
 Also serves as an example for docker within docker usage and shipping binaries with a minimal base image (busybox) after compiling in an intermediary image.
 
