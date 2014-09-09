@@ -7,4 +7,6 @@ ADD ./busybox-rudder/Dockerfile /usr/local/src/rudder/Dockerfile
 
 RUN docker build --rm --force-rm -t gurpartap/rudder /usr/local/src/rudder/
 
-CMD ["./release.sh"]
+ADD ./script/ ./script/
+
+CMD ["./script/release.sh"]

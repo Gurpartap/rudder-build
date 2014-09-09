@@ -1,15 +1,15 @@
 #!/bin/bash
-# Usage: ./release [TAG]
+# Usage: ./release.sh [TAG]
 
 set +e
 
 echo " ---> Building..."
-sh ./script/build.sh
+sh ./build.sh
 
 echo " ---> Pushing gurpartap/rudder:${1:-latest}..."
-sh ./script/push.sh $1
+sh ./push.sh $1
 
 echo " ---> Cleaning up..."
-sh ./script/clean.sh
+sh ./clean.sh
 
 echo " ---> Done."
