@@ -29,7 +29,7 @@ docker rmi -f gurpartap/rudder
 ```
 
 ```bash
-$ ./release.sh # will run them all.
+$ ./script/release.sh # will run them all.
 ```
 
 ##### Copying the binary to host
