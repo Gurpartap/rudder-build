@@ -35,7 +35,7 @@ $ ./release.sh # will run them all.
 ##### Copying the binary to host
 
 ```bash
-# Mount host's /usr/local/bin directory in the container and copy rudder over.
+# Mount host's /opt/bin directory in the container and copy rudder over.
 docker run --rm -v /opt/bin:/opt/bin gurpartap/rudder
 ```
 
